@@ -1,0 +1,25 @@
+@import './_fonts.css';
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-MarckScript: MarckScript;
+  --font-Roboto: Roboto;
+  --font-RobotoCondensed: RobotoCondensed;
+  --font-RobotoMono: RobotoMono;
+}
+
+@utility ff_shadow {
+  box-shadow: 2px 2px 4px rgb(150, 150, 150);
+}
+
+@utility ff_show_hide_translate_buttons {
+  @apply cursor-pointer rounded-sm bg-blue-500 px-4 py-2 text-xs text-white transition-colors hover:bg-blue-600;
+  @apply dark:bg-blue-700 dark:hover:bg-blue-800;
+  box-shadow: 2px 2px 4px rgb(150, 150, 150);
+}
+
+@utility ff_grid-title {
+  @apply ff_shadow text-[12px] flex items-center justify-center rounded-sm bg-gray-300 p-1 text-center dark:bg-gray-700;
+}

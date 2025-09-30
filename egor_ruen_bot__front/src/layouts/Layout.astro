@@ -1,0 +1,60 @@
+---
+import { ClientRouter } from 'astro:transitions'
+
+import { ModeToggle } from '@/components/ModeToggle.tsx'
+import NavMenu from '@/components/NavMenu.astro'
+
+import '@/styles/global.css'
+
+interface IProps {
+  title: string
+}
+const { title = 'page title' } = Astro.props as IProps
+---
+
+<html lang='ru'>
+  <!-- prettier-ignore -->
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <link rel='sitemap' href='/sitemap-index.xml' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <header class='container mx-auto flex justify-between'>
+      <NavMenu />
+      <ModeToggle client:load />
+    </header>
+
+    <main class='container mx-auto'>
+      <slot />
+    </main>
+
+    <!-- <footer class='container mx-auto'>
+      <div class='m-2 flex justify-center bg-sky-200 p-4'>this is a footer</div>
+    </footer> -->
+  </body>
+</html>
+
+<script is:inline>
+  const getThemePreference = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme')
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+  const isDark = getThemePreference() === 'dark'
+  document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
+
+  if (typeof localStorage !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark')
+      localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+  }
+</script>

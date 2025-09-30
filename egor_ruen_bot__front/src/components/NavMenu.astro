@@ -1,0 +1,24 @@
+---
+const activePath: string = Astro.url.pathname
+
+// const currentPath = Astro.url.pathname.split('/').filter(Boolean)[0]
+
+const navMenu = [
+  { url: '/', title: 'Home' },
+  { url: '/about', title: 'About us' },
+  { url: '/contacts', title: 'Наши контакты' },
+  { url: '/partners', title: 'Наши партнеры' }
+]
+---
+
+<nav class='flex gap-4 m-2 *:border *:py-1 *:px-2 *:rounded-lg'>
+  {
+    navMenu.map(item => (
+      <a
+        class={activePath === item.url ? 'bg-sky-200 border border-sky-500' : 'border-transparent hover:border-sky-300'}
+        href={item.url}>
+        {item.title}
+      </a>
+    ))
+  }
+</nav>

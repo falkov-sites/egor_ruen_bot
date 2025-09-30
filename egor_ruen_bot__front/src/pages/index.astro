@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import ThemeToggle from '../components/ThemeToggle.astro'
+import TranslationTable from '../components/TranslationTable.tsx'
+import VerbsTable from '../components/VerbsTable.tsx'
+import { translationBlocks, irregularVerbs } from '../data/data'
+
+const sectionSwitchScript = `
+  document.addEventListener('DOMContentLoaded', () => {
+    const sentencesBtn = document.getElementById('sentences-btn');
+    const verbsBtn = document.getElementById('verbs-btn');
+    const sentencesSection = document.getElementById('sentences-section');
+    const verbsSection = document.getElementById('verbs-section');
+
+    let currentSection = localStorage.getItem('currentSection') || 'sentences';
+    
+    const switchSection = (section) => {
+      currentSection = section;
+      localStorage.setItem('currentSection', section);
+
+      sentencesSection.style.display = (section === 'sentences' ? 'block' : 'none');
+      verbsSection.style.display = (section === 'verbs' ? 'block' : 'none');
+
+      sentencesBtn.classList.toggle('bg-blue-500', section === 'sentences');
+      sentencesBtn.classList.toggle('text-white', section === 'sentences');
+      sentencesBtn.classList.toggle('bg-gray-300', section !== 'sentences');
+      sentencesBtn.classList.toggle('text-gray-800', section !== 'sentences');
+      
+      verbsBtn.classList.toggle('bg-blue-500', section === 'verbs');
+      verbsBtn.classList.toggle('text-white', section === 'verbs');
+      verbsBtn.classList.toggle('bg-gray-300', section !== 'verbs');
+      verbsBtn.classList.toggle('text-gray-800', section !== 'verbs');
+    };
+
+    switchSection(currentSection);
+
+    sentencesBtn.addEventListener('click', () => switchSection('sentences'));
+    verbsBtn.addEventListener('click', () => switchSection('verbs'));
+  });
+`
+---
+
+<BaseLayout title='Переведи на английский'>
+  <ThemeToggle />
+
+  <header class='my-2 text-center'>
+    <h1 class='font-MarckScript my-1 text-4xl font-bold text-blue-700 dark:text-blue-500'>
+      Переведи на английский!
+    </h1>
+  </header>
+
+  <div class='mb-4 flex justify-center gap-4 *:cursor-pointer *:rounded-md *:px-4 *:py-2 *:text-xs'>
+    <button id='sentences-btn' class='bg-gray-300 text-gray-800' type='button'>
+      Предложения
+    </button>
+    <button id='verbs-btn' class='bg-gray-300 text-gray-800' type='button'>
+      Неправильные глаголы
+    </button>
+  </div>
+
+  <main class='w-full max-w-6xl'>
+    <section id='sentences-section' style='display: none;'>
+      <TranslationTable data={translationBlocks} client:load />
+    </section>
+
+    <section id='verbs-section' style='display: none;'>
+      <VerbsTable data={irregularVerbs} client:load />
+    </section>
+  </main>
+
+  <script is:inline set:html={sectionSwitchScript} />
+</BaseLayout>

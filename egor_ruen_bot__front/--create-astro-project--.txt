@@ -1,0 +1,128 @@
+✺ создать папку для проекта
+✺ открыть ее в VS Code
+
+✺ запустить в терминале VSC: 
+/Volumes/nvme_512/_dev/__FOR_ASTRO_PROJECTS/_create_astro_project.sh
+-------------------------------------------------------------------------------
+🟡 "tailwind.config.mjs":
+
+-------------------------------------------------------------------------------
+🟡 "package.json":
+
+  1️⃣ добавить --host:
+      "dev": "astro dev --host",
+
+  2️⃣ добавить ключ 'prettier'  после devDependencies:
+  "devDependencies": {
+    ...
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "es5",
+    "semi": false,
+    "bracketSameLine": false,
+    "singleAttributePerLine": false,
+    "plugins": [
+      "prettier-plugin-astro",
+      "prettier-plugin-tailwindcss"
+    ]  
+  }
+-------------------------------------------------------------------------------
+  npm run dev
+===============================================================================
+                              FONTS:
+1️⃣ сформировать шрифты в "_projects/__FOR_ASTRO_PROJECTS/__GULP_FOR_ASSETS/_mygulp"
+
+2️⃣ скопировать из созданной там папки "build/fonts/":
+    - файлы '*.woff2'     =>  в папку "src/fonts/"
+    - файл  '_fonts.css'  =>  в папку "src/styles/" (заменить существующий там)
+
+3️⃣ src/styles/global.css:
+1. подключить первой строкой _fonts.css
+2. зарегистрировать шрифты в @theme
+
+@import './_fonts.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-MarckScript: MarckScript;
+  --font-Roboto: Roboto;
+  --font-RobotoCondensed: RobotoCondensed;
+  --font-RobotoMono: RobotoMono;
+}
+
+теперь можно эти шрифты указывать в tailwind: <div class='font-MarckScript>
+-------------------------------------------------------------------------------
+                            MY-STYLES:
+Theme variables: https://tailwindcss.com/docs/theme#theme-variable-namespaces
+
+добавить в src/styles/global.css:
+
+@theme {
+  --shadow-01: 2px 2px 4px rgb(150, 150, 150);
+}                      
+-------------------------------------------------------------------------------
+                               SVG:
+оптимизация - https://jakearchibald.github.io/svgomg/
+  ✺ выделить svg в файле
+  ✺ на сайте "Paste murkup", внизу справа средний значок "Копировать"
+  ✺ вставить обратно в файл
+-------------------------------------------------------------------------------
+                              ICONS:
+  https://lucide.dev/icons/ 
+===============================================================================
+
+                🌼🌼 TAILWIND плагины: 🌼🌼
+
+🌼 tailwindcss-animated:
+https://github.com/new-data-services/tailwindcss-animated#readme
+
+1️⃣  npm i tailwindcss-animated
+
+2️⃣  добавить плагин в "tailwind.config.js":
+
+      export default {
+        darkMode: ['class'],
+        ...
+
+        plugins: [
+          require('tailwindcss-animated')
+        ],
+      }
+
+конфигуратор: https://www.tailwindcss-animated.com/configurator.html
+-------------------------------------------------------------------------------
+🌼 tailwindcss-3d:
+https://github.com/sambauers/tailwindcss-3d
+1️⃣  npm install -D tailwindcss-3d
+
+2️⃣  добавить плагин в "tailwind.config.js":
+
+      export default {
+        darkMode: ['class'],
+        ...
+
+        plugins: [
+          require('tailwindcss-3d')
+          // require('tailwindcss-3d')({ legacy: true }), // support older browsers
+        ],
+      }
+===============================================================================
+      мои компоненты:
+cp /Volumes/ssd_sata/_projects/__FOR_ASTRO_PROJECTS/components/TailwindColors.tsx ./src/components
+cp /Volumes/ssd_sata/_projects/__FOR_ASTRO_PROJECTS/components/MyTailwindClasses.tsx ./src/components
+cp /Volumes/ssd_sata/_projects/__FOR_ASTRO_PROJECTS/components/CarsFilter.tsx ./src/components
+
+      мои стили:
+cp /Volumes/ssd_sata/_projects/__STYLES/_gradients.css ./src/styles
+
+      страница и компонент Product:
+cp /Volumes/ssd_sata/_projects/__FOR_ASTRO_PROJECTS/pages/products.astro ./src/pages
+cp /Volumes/ssd_sata/_projects/__FOR_ASTRO_PROJECTS/components/ProductCard.tsx ./src/components
+
+

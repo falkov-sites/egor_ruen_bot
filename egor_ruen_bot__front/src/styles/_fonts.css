@@ -1,0 +1,65 @@
+@font-face {
+  font-family: MarckScript;
+  src: url(../fonts/MarckScript-Regular.woff2) format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../fonts/Roboto-Regular.woff2) format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: RobotoCondensed;
+  src: url(../fonts/RobotoCondensed-Regular.woff2) format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: RobotoMono;
+  src: url(../fonts/RobotoMono-Regular.woff2) format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/*
+файл src/styles/global.css:
+
+1. подключить первой строкой _fonts.css
+2. зарегистрировать шрифты в @theme
+
+@import './_fonts.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-MarckScript: MarckScript;
+  --font-Roboto: Roboto;
+  --font-RobotoCondensed: RobotoCondensed;
+  --font-RobotoMono: RobotoMono;
+}
+*/
+
+/*
+font-weight:
+  100  thin
+  200  ultralite
+  300  light
+  400  regular, normal
+  500  medium
+  600  semibold
+  700  bold
+  800  heavy
+  900  black
+
+типы шрифтов:
+  serif      - шрифты с засечками (Times)
+  sans-serif - шрифты без засечек (Arial)
+  cursive    - курсивные шрифты
+  fantasy    - декоративные шрифты
+  monospace  - моноширинные шрифты
+*/

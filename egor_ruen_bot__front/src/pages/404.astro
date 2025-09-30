@@ -1,0 +1,15 @@
+---
+import Layout from '@/layouts/Layout.astro'
+
+const activePath: string = Astro.url.pathname
+const pageName = 'page 404'
+---
+
+<Layout title={pageName}>
+  <div class='container m-2 flex h-[80vh] flex-col items-center justify-center gap-1'>
+    <p class='text-xl'>страница по адресу:</p>
+    <p class='text-2xl text-blue-600 dark:text-blue-500'>'{activePath}'</p>
+    <p class='text-xl'>еще в разработке</p>
+    <p class='text-6xl'>😢</p>
+  </div>
+</Layout>
